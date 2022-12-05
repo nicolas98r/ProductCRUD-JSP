@@ -1,0 +1,9 @@
+#Carpetas de Netbeans
+build
+dist
+nbproject
+build.xml
+
+#Cache SQL Workbench
+*.mwbv.bak
+*.bak
