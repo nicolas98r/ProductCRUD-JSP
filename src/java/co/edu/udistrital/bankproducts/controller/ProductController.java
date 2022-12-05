@@ -15,9 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import co.edu.udistrital.bankproducts.model.ProductDTO;
 import java.sql.Date;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -63,7 +60,6 @@ public class ProductController extends HttpServlet {
             List<ProductDTO> products = service.getProducts();
             request.setAttribute("products", products);
             page = "./JSPs/get.jsp";
-          
         }
         request.getRequestDispatcher(page).forward(request, response);
     }
@@ -81,14 +77,14 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         String action =  request.getParameter("action");
         ProductDTO dto = new ProductDTO();
-        if (action.equalsIgnoreCase("submit")) {
+        if (action.equalsIgnoreCase("Crear")) {
             dto.setId(Integer.valueOf(request.getParameter("id")));
             dto.setBalance(Float.valueOf(request.getParameter("balance")));
             dto.setInterest(Float.valueOf(request.getParameter("interest")));
             dto.setCreation(Date.valueOf(request.getParameter("creation")));
-            dto.setCreation(Date.valueOf(request.getParameter("expiration")));
+            dto.setExpiration(Date.valueOf(request.getParameter("expiration")));
             service.addProduct(dto, Integer.valueOf(request.getParameter("type")));
-            page = "./JSPs/get.jsp";
+            page = "./index.jsp";
         }
         request.getRequestDispatcher(page).include(request, response);
     }

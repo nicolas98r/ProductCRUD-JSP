@@ -33,7 +33,7 @@
             Fecha de Expiración <input type="date" id="expiration" name="expiration"
         value="2019-11-22"
        min="2016-01-01" max="2024-12-31"><br>
-            <input type="submit" name="action" value="submit" />
+            <input type="submit" name="action" value="Crear" />
         </form>
     </body>
 </html>

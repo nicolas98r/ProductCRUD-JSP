@@ -17,6 +17,7 @@ import co.edu.udistrital.bankproducts.model.ProductMapper;
 import co.edu.udistrital.bankproducts.model.factory.CreditProductFactory;
 import co.edu.udistrital.bankproducts.model.factory.DebitProductFactory;
 import co.edu.udistrital.bankproducts.model.factory.ProductFactory;
+import java.sql.PreparedStatement;
 /**
  *
  * @author nico9
@@ -33,7 +34,7 @@ public class ProductDAO implements IProductDAO{
         ProductDTO product;
         String query = "SELECT P.id, T.name as type, P.balance, P.interest, "
                 + "P.creationDate, P.expirationDate from product P join "
-                + "productType T on P.type = T.id;";
+                + "productType T on P.type = T.id WHERE P.idClient = 123456789;";
         this.connection = ConnectionBD.getConnection();
         try {
             this.stmt = connection.createStatement();
@@ -63,7 +64,6 @@ public class ProductDAO implements IProductDAO{
                     list.add(product);
                 }
             }
-            this.connection.close();
         } catch (SQLException e) {
             System.out.println(e);
         }  
@@ -74,14 +74,13 @@ public class ProductDAO implements IProductDAO{
     public void addProduct(ProductDTO product, int typeId) {
         String query = "INSERT INTO product(id, balance, interest, creationDate,"
                 + "expirationDate, type, idClient) VALUES("+ product.getId() +","
-                + product.getBalance()+","+ product.getInterest() +","
-                + product.getCreation() +","+ product.getExpiration() +","
-                + typeId +",123456789)";
+                + product.getBalance()+","+ product.getInterest() +",'"
+                + product.getCreation() +"','"+ product.getExpiration() +"',"
+                + typeId +",123456789);";
         this.connection = ConnectionBD.getConnection();
         try {
-            this.stmt = connection.createStatement();
-            this.rs = stmt.executeQuery(query);
-            this.connection.close();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);  
         }
