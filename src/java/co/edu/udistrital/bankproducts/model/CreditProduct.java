@@ -14,8 +14,8 @@ import java.sql.Date;
 public class CreditProduct implements Product{
     private int id;
     private String name;
-    private String balance;
-    private String interest;
+    private float balance;
+    private float interest;
     private Date creation;
     private Date expiration;
 
@@ -35,19 +35,19 @@ public class CreditProduct implements Product{
         this.name = name;
     }
 
-    public String getBalance() {
+    public float getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
 
-    public String getInterest() {
+    public float getInterest() {
         return interest;
     }
 
-    public void setInterest(String interest) {
+    public void setInterest(float interest) {
         this.interest = interest;
     }
 

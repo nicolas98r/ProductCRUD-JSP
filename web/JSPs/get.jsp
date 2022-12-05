@@ -1,14 +1,14 @@
 <%-- 
-    Document   : create_product
+    Document   : get
     Created on : 15-nov-2022, 1:29:01
     Author     : nico9
 --%>
 
-<%@page import="java.util.Iterator"%>
+
+<%@page import="co.edu.udistrital.bankproducts.model.ProductDTO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="co.edu.udistrital.bankproducts.DAOs.ProductDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="co.edu.udistrital.bankproducts.model.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,23 +22,27 @@
                 <thead>
                     <th>NÚMERO</th>
                     <th>TIPO</th>
-                    <th>CATEGORÍA</th>
+                    <th>BALANCE</th>
                     <th>INTERES</th>
+                    <th>FECHA CREACIÓN</th>
+                    <th>FECHA EXPIRACIÓN</th>
                 </thead>
                 <% 
-                    List<Account> list = (List<Account>)request.getAttribute("accounts");
-                    Iterator<Account> iter = list.iterator();
-                    Account acco= null;
+                    List<ProductDTO> list = (List<ProductDTO>)request.getAttribute("products");
+                    Iterator<ProductDTO> iter = list.iterator();
+                    ProductDTO product = null;
                     while (iter.hasNext()) {
-                        acco = iter.next();
+                        product = iter.next();
                     
                 %>
                 <tbody>
                     <tr>
-                        <td><%= acco.getId() %></td>
-                        <td><%= acco.getType() %></td>
-                        <td><%= acco.getCategory() %></td>
-                        <td><%= acco.getName() %></td>
+                       <td><%= product.getId() %></td>
+                       <td><%= product.getName() %></td>
+                       <td><%= product.getBalance() %></td>
+                       <td><%= product.getInterest() %></td>
+                       <td><%= product.getCreation() %></td>
+                       <td><%= product.getExpiration() %></td>
                     </tr>
                     <% } %>
                 </tbody>

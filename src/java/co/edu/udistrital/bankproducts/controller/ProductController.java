@@ -8,13 +8,12 @@ package co.edu.udistrital.bankproducts.controller;
 import co.edu.udistrital.bankproducts.DAOs.IProductDAO;
 import co.edu.udistrital.bankproducts.DAOs.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import co.edu.udistrital.bankproducts.model.Product;
+import co.edu.udistrital.bankproducts.model.ProductDTO;
 
 /**
  *
@@ -38,9 +37,9 @@ public class ProductController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Product> accounts = service.getAccounts();
-        request.setAttribute("accounts", accounts);
-        request.getRequestDispatcher("./JSPs/get_products.jsp").forward(request, response);
+        List<ProductDTO> products = service.getProducts();
+        request.setAttribute("products", products);
+        request.getRequestDispatcher("./JSPs/get.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

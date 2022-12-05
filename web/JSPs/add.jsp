@@ -14,8 +14,8 @@
     <body>
         <h1>Añadir productos</h1>
         <form>
-             User: <input type="text" name="user">
-            Password <input type="text" name="password">
+            User: <input type="text" name="user"><br>
+            Password <input type="text" name="password"><br>
             <input type="submit" name="ingresar" value="Ingresar" />
         </form>
     </body>

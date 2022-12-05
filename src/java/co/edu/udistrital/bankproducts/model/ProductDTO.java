@@ -11,13 +11,14 @@ import java.sql.Date;
  *
  * @author nico9
  */
-public class DebitProduct implements Product{
+public class ProductDTO {
     private int id;
     private String name;
     private float balance;
+    private float interest;
     private Date creation;
     private Date expiration;
-    
+
     public int getId() {
         return id;
     }
@@ -42,6 +43,14 @@ public class DebitProduct implements Product{
         this.balance = balance;
     }
 
+    public float getInterest() {
+        return interest;
+    }
+
+    public void setInterest(float interest) {
+        this.interest = interest;
+    }
+
     public Date getCreation() {
         return creation;
     }
@@ -56,5 +65,5 @@ public class DebitProduct implements Product{
 
     public void setExpiration(Date expiration) {
         this.expiration = expiration;
-    }
+    }   
 }
