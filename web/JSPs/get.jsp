@@ -14,10 +14,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BankProducts</title>
     </head>
     <body>
         <div>
+            <a href="ProductController?action=add"><h1>Añadir producto</h1></a>
             <table border="1">
                 <thead>
                     <th>NÚMERO</th>
@@ -38,7 +39,7 @@
                 <tbody>
                     <tr>
                        <td><%= product.getId() %></td>
-                       <td><%= product.getName() %></td>
+                       <td><%= product.getType() %></td>
                        <td><%= product.getBalance() %></td>
                        <td><%= product.getInterest() %></td>
                        <td><%= product.getCreation() %></td>

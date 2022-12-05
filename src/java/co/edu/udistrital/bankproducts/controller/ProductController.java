@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import co.edu.udistrital.bankproducts.model.ProductDTO;
+import java.sql.Date;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +25,7 @@ import co.edu.udistrital.bankproducts.model.ProductDTO;
  */
 public class ProductController extends HttpServlet {
     private final IProductDAO service;
+    private String page;
     
     public ProductController(){
         this.service = new ProductDAO();
@@ -37,9 +42,6 @@ public class ProductController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<ProductDTO> products = service.getProducts();
-        request.setAttribute("products", products);
-        request.getRequestDispatcher("./JSPs/get.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,7 +56,16 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action =  request.getParameter("action");
+        if (action.equalsIgnoreCase("add")) {
+            page = "./JSPs/add.jsp";
+        }else if (action.equalsIgnoreCase("Ingresar")) {
+            List<ProductDTO> products = service.getProducts();
+            request.setAttribute("products", products);
+            page = "./JSPs/get.jsp";
+          
+        }
+        request.getRequestDispatcher(page).forward(request, response);
     }
 
     /**
@@ -68,7 +79,18 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action =  request.getParameter("action");
+        ProductDTO dto = new ProductDTO();
+        if (action.equalsIgnoreCase("submit")) {
+            dto.setId(Integer.valueOf(request.getParameter("id")));
+            dto.setBalance(Float.valueOf(request.getParameter("balance")));
+            dto.setInterest(Float.valueOf(request.getParameter("interest")));
+            dto.setCreation(Date.valueOf(request.getParameter("creation")));
+            dto.setCreation(Date.valueOf(request.getParameter("expiration")));
+            service.addProduct(dto, Integer.valueOf(request.getParameter("type")));
+            page = "./JSPs/get.jsp";
+        }
+        request.getRequestDispatcher(page).include(request, response);
     }
 
     /**

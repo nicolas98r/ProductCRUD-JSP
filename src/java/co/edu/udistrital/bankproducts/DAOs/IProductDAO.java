@@ -14,7 +14,7 @@ import co.edu.udistrital.bankproducts.model.ProductDTO;
  */
 public interface IProductDAO {
     public List<ProductDTO> getProducts();
-    public void addProduct(ProductDTO product);
+    public void addProduct(ProductDTO product, int typeId);
     public void editProduct(ProductDTO product);
     public void deleteProduct(int productId);
 }

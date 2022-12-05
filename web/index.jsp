@@ -9,15 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BankProducts</title>
     </head>
     <body>
         <h1>LOGIN</h1>
-        <form action="ProductController" method="POST">
-            
+        <form action="ProductController" method="GET">    
             User: <input type="text" name="user">
-            Password <input type="text" name="password">
-            <input type="submit" name="ingresar" value="Ingresar" />
+            Password <input type="password" name="password">
+            <input type="submit" name="action" value="Ingresar" />
             
         </form>
         

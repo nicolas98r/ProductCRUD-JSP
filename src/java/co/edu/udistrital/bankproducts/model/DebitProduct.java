@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class DebitProduct implements Product{
     private int id;
-    private String name;
+    private String type;
     private float balance;
     private Date creation;
     private Date expiration;
@@ -26,12 +26,12 @@ public class DebitProduct implements Product{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public float getBalance() {

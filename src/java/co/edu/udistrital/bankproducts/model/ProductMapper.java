@@ -16,7 +16,7 @@ public class ProductMapper {
         if (product instanceof CreditProduct) {
             CreditProduct cred= (CreditProduct) product;
             dto.setId(cred.getId());
-            dto.setName(cred.getName());
+            dto.setType(cred.getType());
             dto.setBalance(cred.getBalance());
             dto.setInterest(cred.getInterest());
             dto.setCreation(cred.getCreation());
@@ -24,7 +24,7 @@ public class ProductMapper {
         } else {
             DebitProduct deb = (DebitProduct) product;
             dto.setId(deb.getId());
-            dto.setName(deb.getName());
+            dto.setType(deb.getType());
             dto.setBalance(deb.getBalance());
             dto.setInterest(0);
             dto.setCreation(deb.getCreation());
