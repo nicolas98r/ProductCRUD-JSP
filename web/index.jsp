@@ -12,11 +12,11 @@
         <title>BankProducts</title>
     </head>
     <body>
-        <h1>LOGIN</h1>
+        <h1>Busqueda de Clientes:</h1>
         <form action="ProductController" method="GET">    
-            User: <input type="text" name="user">
-            Password <input type="password" name="password">
-            <input type="submit" name="action" value="Ingresar" />
+            Busqueda por id: <input type="text" name="id"><br>
+            Busqueda por nombre y apellido <input type="text" name="name"><br>
+            <input type="submit" name="action" value="Buscar"/>
             
         </form>
         

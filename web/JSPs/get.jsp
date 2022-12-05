@@ -18,7 +18,7 @@
     </head>
     <body>
         <div>
-            <a href="ProductController?action=add"><h1>Añadir producto</h1></a>
+            <h1>Hola <%request.getAttribute("name");%>!</h1>
             <table border="1">
                 <thead>
                     <th>NÚMERO</th>
@@ -29,7 +29,7 @@
                     <th>FECHA EXPIRACIÓN</th>
                 </thead>
                 <% 
-                    List<ProductDTO> list = (List<ProductDTO>)request.getAttribute("products");
+                    List<ProductDTO> list = (List<ProductDTO>) request.getAttribute("products");
                     Iterator<ProductDTO> iter = list.iterator();
                     ProductDTO product = null;
                     while (iter.hasNext()) {
@@ -48,6 +48,7 @@
                     <% } %>
                 </tbody>
             </table>
+            <a href="ProductController?action=add"><h1>Añadir producto</h1></a>
         </div>
     </body>
 </html>

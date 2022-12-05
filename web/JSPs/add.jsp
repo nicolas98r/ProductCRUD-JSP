@@ -14,7 +14,7 @@
     <body>
         <h1>Añadir productos</h1>
          <form action="ProductController" method="POST">
-            ID: <input type="number" name="id"><br>
+            ID: <input type="text" name="id"><br>
             Tipo: <select name="type">
                     <option value="1" selected>Cuenta Corriente</option>
                     <option value="2">Seguro Automotriz</option>
@@ -25,15 +25,15 @@
                     <option value="7">Tarjeta Platinum</option>
                     <option value="8">Tarjeta Infinite</option>
                 </select><br>
-            Balance: <input type="number" name="balance"><br>
-            Interes <input type="number" name="interest"><br>
+            Balance: <input type="text" name="balance"><br>
+            Interes <input type="text" name="interest"><br>
             Fecha de Creación: <input type="date" id="creation" name="creation"
         value="2019-11-22"
        min="2016-01-01" max="2024-12-31"><br>
             Fecha de Expiración <input type="date" id="expiration" name="expiration"
         value="2019-11-22"
        min="2016-01-01" max="2024-12-31"><br>
-            <input type="submit" name="action" value="Crear" />
+            <input type="submit" name="action" value="Crear"/>
         </form>
     </body>
 </html>

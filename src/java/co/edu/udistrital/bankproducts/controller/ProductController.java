@@ -56,9 +56,20 @@ public class ProductController extends HttpServlet {
         String action =  request.getParameter("action");
         if (action.equalsIgnoreCase("add")) {
             page = "./JSPs/add.jsp";
-        }else if (action.equalsIgnoreCase("Ingresar")) {
-            List<ProductDTO> products = service.getProducts();
+        }else if (action.equalsIgnoreCase("Buscar")) {
+            List<ProductDTO> products = null;
+            if(!request.getParameter("id").isEmpty()) { //Busqueda por ID
+                int id = Integer.valueOf(request.getParameter("id"));
+                products = service.getProductsById(id);
+                request.setAttribute("name", service.getName(id));
+            }else if(!request.getParameter("name").isEmpty()) { //Busqueda por Nombre Completo
+                String name = request.getParameter("name");
+                products = service.getProductsByName(name);
+                request.setAttribute("name", name);
+            }
             request.setAttribute("products", products);
+            
+        
             page = "./JSPs/get.jsp";
         }
         request.getRequestDispatcher(page).forward(request, response);
