@@ -4,8 +4,16 @@
         <servlet-name>ProductController</servlet-name>
         <servlet-class>co.edu.udistrital.bankproducts.controller.ProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ClientController</servlet-name>
+        <servlet-class>co.edu.udistrital.bankproducts.controller.ClientController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductController</servlet-name>
         <url-pattern>/ProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientController</servlet-name>
+        <url-pattern>/ClientController</url-pattern>
     </servlet-mapping>
 </web-app>

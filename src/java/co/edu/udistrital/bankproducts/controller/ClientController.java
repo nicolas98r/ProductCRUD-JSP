@@ -5,28 +5,27 @@
  */
 package co.edu.udistrital.bankproducts.controller;
 
-import co.edu.udistrital.bankproducts.service.IProductDAO;
-import co.edu.udistrital.bankproducts.service.ProductDAO;
+import co.edu.udistrital.bankproducts.service.ClientDAO;
+import co.edu.udistrital.bankproducts.service.IClientDAO;
+import co.edu.udistrital.bankproducts.model.ClientDTO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import co.edu.udistrital.bankproducts.model.ProductDTO;
-import java.sql.Date;
 
 /**
  *
  * @author nico9
  */
-public class ProductController extends HttpServlet {
+public class ClientController extends HttpServlet {
 
-    private final IProductDAO service;
+    private final IClientDAO service;
     private String page;
+    private ClientDTO dto = new ClientDTO();
 
-    public ProductController() {
-        this.service = new ProductDAO();
+    public ClientController() {
+        this.service = new ClientDAO();
     }
 
     /**
@@ -57,15 +56,20 @@ public class ProductController extends HttpServlet {
         //Barmenu
         String menu = request.getParameter("menu");
         switch (menu) {
-            case "Productos":
-                List<ProductDTO> products;
-                products = service.getProducts(123456789);
-                request.setAttribute("products", products);
-                page = "./JSPs/Productos/get_products.jsp";
+            case "Inicio":
+                page = "./JSPs/Inicio/get_client.jsp";
+                break;
+            case "Clientes":
+                page = "./JSPs/Clientes/find_clients.jsp";
                 break;
         }
 
         request.getRequestDispatcher(page).forward(request, response);
+        /*if (action.equalsIgnoreCase("add")) {
+            page = "./JSPs/add_user.jsp";
+        }else if (action.equalsIgnoreCase("get")) {
+            page = "./JSPs/get.jsp";
+        }*/
     }
 
     /**
@@ -80,16 +84,33 @@ public class ProductController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        ProductDTO dto = new ProductDTO();
-        if (action.equalsIgnoreCase("Crear")) {
-            dto.setId(Integer.valueOf(request.getParameter("id")));
-            dto.setBalance(Float.valueOf(request.getParameter("balance")));
-            dto.setInterest(Float.valueOf(request.getParameter("interest")));
-            dto.setCreation(Date.valueOf(request.getParameter("creation")));
-            dto.setExpiration(Date.valueOf(request.getParameter("expiration")));
-            service.addProduct(dto, Integer.valueOf(request.getParameter("type")));
-            page = "./index.jsp";
+        switch (action) {
+            case "Ingresar":
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                dto = service.login(username, password);
+                if (dto.getFirstName() != null) {
+                    request.setAttribute("usuario", dto.getFirstName());
+                    page = "./JSPs/main.jsp";
+                } else {
+                    page = "index.jsp";
+                }
+                break;
+            default:
+                page = "index.jsp";
         }
+        //ClientDTO dto = new ClientDTO();
+        /*if (action.equalsIgnoreCase("Crear")) {
+            dto.setId(Integer.valueOf(request.getParameter("id")));
+            dto.setFirstName(request.getParameter("firstName"));
+            dto.setLastName(request.getParameter("lasttName"));
+            dto.setEmail(request.getParameter("email"));
+            dto.setUsername(request.getParameter("username"));
+            dto.setPassword(request.getParameter("password"));
+            
+            service.addClient(dto);
+            page = "./index.jsp";
+        }*/
         request.getRequestDispatcher(page).include(request, response);
     }
 
@@ -102,4 +123,5 @@ public class ProductController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

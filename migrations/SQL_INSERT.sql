@@ -6,7 +6,7 @@
 INSERT INTO bank_products.productType(name) VALUES ("Cuenta Corriente"),("Seguro Automotriz"),("Cuenta Ahorros"),("Crédito Consumo"),("Crédito Hipotecario"),("Tarjeta Gold"),("Tarjeta Platinum"), ("Tarjeta Infinite");
 
 -- Clients
-insert into bank_products.client (id, firstName, lastName, email, username, password) values ('123456789', 'Nicolas', 'Ramirez', 'nico98@a.com', 'nico', 'nico');
+insert into bank_products.client (id, firstName, lastName, email, username, password, isAdmin) values ('123456789', 'Nicolas', 'Ramirez', 'nico98@a.com', 'nico', 'nico', true);
 insert into bank_products.client (id, firstName, lastName, email, username, password) values ('379545502', 'Tilda', 'Nowell', 'tnowell0@i2i.jp', 'tnowell0', 'beFrKRv6i');
 insert into bank_products.client (id, firstName, lastName, email, username, password) values ('332196844', 'Philipa', 'Kemsley', 'pkemsley1@sphinn.com', 'pkemsley1', 'zSxEMvcttR');
 insert into bank_products.client (id, firstName, lastName, email, username, password) values ('779372141', 'Erek', 'Frigout', 'efrigout2@auda.org.au', 'efrigout2', 'ceB2cyL');

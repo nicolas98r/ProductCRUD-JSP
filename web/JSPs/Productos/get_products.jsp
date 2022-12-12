@@ -7,7 +7,6 @@
 
 <%@page import="co.edu.udistrital.bankproducts.model.ProductDTO"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="co.edu.udistrital.bankproducts.DAOs.ProductDAO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +17,8 @@
     </head>
     <body>
         <div>
-            <h1>Hola <%request.getAttribute("name");%>!</h1>
+            <h1>LISTA DE PRODUCTOS</h1>
+            <a href="ProductController?action=add"><h1>Añadir producto</h1></a>
             <table border="1">
                 <thead>
                     <th>NÚMERO</th>
@@ -48,7 +48,7 @@
                     <% } %>
                 </tbody>
             </table>
-            <a href="ProductController?action=add"><h1>Añadir producto</h1></a>
+            
         </div>
     </body>
 </html>
