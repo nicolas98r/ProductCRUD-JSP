@@ -25,7 +25,7 @@ public class ClientDAO implements IClientDAO{
     @Override
     public ClientDTO login(String username, String password) {
         ClientDTO client = null;
-        String query = "SELECT * FROM bank_products.client WHERE username = '"
+        String query = "SELECT * FROM client WHERE username = '"
                 + username +"' AND password = '"+ password +"';";
         this.connection = ConnectionBD.getConnection();
         try {

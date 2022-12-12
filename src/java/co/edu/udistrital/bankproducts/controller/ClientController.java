@@ -22,10 +22,11 @@ public class ClientController extends HttpServlet {
 
     private final IClientDAO service;
     private String page;
-    private ClientDTO dto = new ClientDTO();
+    private ClientDTO client;
 
     public ClientController() {
         this.service = new ClientDAO();
+        this.client = new ClientDTO();
     }
 
     /**
@@ -88,9 +89,9 @@ public class ClientController extends HttpServlet {
             case "Ingresar":
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
-                dto = service.login(username, password);
-                if (dto.getFirstName() != null) {
-                    request.setAttribute("usuario", dto.getFirstName());
+                client = service.login(username, password);
+                if (client.getFirstName() != null) {
+                    request.getSession().setAttribute("usuario", client);
                     page = "./JSPs/main.jsp";
                 } else {
                     page = "index.jsp";
@@ -99,18 +100,6 @@ public class ClientController extends HttpServlet {
             default:
                 page = "index.jsp";
         }
-        //ClientDTO dto = new ClientDTO();
-        /*if (action.equalsIgnoreCase("Crear")) {
-            dto.setId(Integer.valueOf(request.getParameter("id")));
-            dto.setFirstName(request.getParameter("firstName"));
-            dto.setLastName(request.getParameter("lasttName"));
-            dto.setEmail(request.getParameter("email"));
-            dto.setUsername(request.getParameter("username"));
-            dto.setPassword(request.getParameter("password"));
-            
-            service.addClient(dto);
-            page = "./index.jsp";
-        }*/
         request.getRequestDispatcher(page).include(request, response);
     }
 

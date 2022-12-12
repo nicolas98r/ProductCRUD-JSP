@@ -104,7 +104,14 @@ public class ProductDAO implements IProductDAO {
 
     @Override
     public void updateProduct(ProductDTO product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "UPDATE product SET balance = "+ product.getBalance() +", interest = "+ product.getInterest() +" , creationDate = "+ product.getCreation() +" , expirationDate = "+ product.getExpiration() +" , password = \"123\" WHERE id = "+ product.getId() +";";
+        this.connection = ConnectionBD.getConnection();
+        try {
+            this.ps = connection.prepareStatement(query);
+            this.ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     @Override

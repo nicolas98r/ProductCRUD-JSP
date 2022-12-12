@@ -5,6 +5,7 @@
  */
 package co.edu.udistrital.bankproducts.controller;
 
+import co.edu.udistrital.bankproducts.model.ClientDTO;
 import co.edu.udistrital.bankproducts.service.IProductDAO;
 import co.edu.udistrital.bankproducts.service.ProductDAO;
 import java.io.IOException;
@@ -24,9 +25,11 @@ public class ProductController extends HttpServlet {
 
     private final IProductDAO service;
     private String page;
+    private ProductDTO product;
 
     public ProductController() {
         this.service = new ProductDAO();
+        this.product = new ProductDTO();
     }
 
     /**
@@ -54,15 +57,21 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Barmenu
         String menu = request.getParameter("menu");
-        switch (menu) {
-            case "Productos":
-                List<ProductDTO> products;
-                products = service.getProducts(123456789);
-                request.setAttribute("products", products);
-                page = "./JSPs/Productos/get_products.jsp";
-                break;
+        String action = request.getParameter("action");
+        //Barmenu
+        if (menu.equals("Productos")) {
+            switch (action) {
+                case "get":
+                    ClientDTO user = (ClientDTO) request.getSession().getAttribute("usuario");
+                    List<ProductDTO> products = service.getProducts(user.getId());
+                    request.setAttribute("products", products);
+                    page = "./JSPs/Productos/get_products.jsp";
+                    break;
+                case "add":
+                    page = "./JSPs/Productos/add_product.jsp";
+                    break;
+            }
         }
 
         request.getRequestDispatcher(page).forward(request, response);
@@ -80,15 +89,16 @@ public class ProductController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        ProductDTO dto = new ProductDTO();
-        if (action.equalsIgnoreCase("Crear")) {
-            dto.setId(Integer.valueOf(request.getParameter("id")));
-            dto.setBalance(Float.valueOf(request.getParameter("balance")));
-            dto.setInterest(Float.valueOf(request.getParameter("interest")));
-            dto.setCreation(Date.valueOf(request.getParameter("creation")));
-            dto.setExpiration(Date.valueOf(request.getParameter("expiration")));
-            service.addProduct(dto, Integer.valueOf(request.getParameter("type")));
-            page = "./index.jsp";
+        switch (action) {
+            case "Crear":
+                product.setId(Integer.valueOf(request.getParameter("id")));
+                product.setBalance(Float.valueOf(request.getParameter("balance")));
+                product.setInterest(Float.valueOf(request.getParameter("interest")));
+                product.setCreation(Date.valueOf(request.getParameter("creation")));
+                product.setExpiration(Date.valueOf(request.getParameter("expiration")));
+                service.addProduct(product, Integer.valueOf(request.getParameter("type")));
+                page = "./JSPs/response.jsp";
+                break;
         }
         request.getRequestDispatcher(page).include(request, response);
     }

@@ -22,7 +22,7 @@
                             <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="ClientController?menu=Inicio" target="myFrame">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="ProductController?menu=Productos" target="myFrame">Productos</a>
+                            <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="ProductController?menu=Productos&action=get" target="myFrame">Productos</a>
                         </li>
                         <li class="nav-item">
                             <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="ClientController?menu=Clientes" target="myFrame">Clientes</a>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="dropdown">
                     <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Hola ${usuario}
+                        Hola ${usuario.getFirstName()}
                     </button>
                     <div class="dropdown-menu">
                         <form action="ClientController" method="POST">
